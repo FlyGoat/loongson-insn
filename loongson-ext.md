@@ -598,8 +598,33 @@ StoreMemory (CCA, DOUBLEWORD, datadoubleword, pAddr, vAddr, DATA)
 #### Exceptions
 Coprocessor Unusable, TLB Refill, TLB Invalid, TLB Modified, Bus Error, Address Error, Watch
 
+### Load & Store with shifting
+
+```
+|--------------------------------------------------------------------------------
+| 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 |    
+|           MAJOR_OP          |          RS            |           RT           |
+|-------------------------------------------------------------------------------- 
+
+---------------------------------------------------------------------|
+ 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+  0    0 |               offset              |          OP0          |
+---------------------------------------------------------------------|
+```
+|  INSN   |  MAJOR_OP  | OP0 |
+|  ----   | ---------- | --- |
+| gslwlc1 | 0x32(LWC2) | 0x4 |
+| gslwrc1 | 0x32(LWC2) | 0x5 |
+| gsldlc1 | 0x32(LWC2) | 0x6 |
+| gsldrc1 | 0x32(LWC2) | 0x7 |
+| gsswlc1 | 0x3A(SWC2) | 0x4 |
+| gsswrc1 | 0x3A(SWC2) | 0x5 |
+| gssdlc1 | 0x3A(SWC2) | 0x6 |
+| gssdrc1 | 0x3A(SWC2) | 0x7 |
+
+Mostly identical with lwl/lwr/ldl/ldr/swl/swr/ldl/ldr instructions from MIPS. But RT is FPR instead of GPR.
 
 ---
-TODO: gs{l,s}{w,d}{l,r} family, gs{,d}{mult,div,mod}{,u} family
+TODO: gs{,d}{mult,div,mod}{,u} family
 
 Not planed: gsle family
