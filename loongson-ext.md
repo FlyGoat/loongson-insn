@@ -30,13 +30,13 @@ To load a quadword from memory to two GPRs
 
 #### Description 
 ```
-GPR[RT_0] ← memory[GPR[RS] + offset * 8]
-GPR[RT_1] ← memory[GPR[RS] + offset * 8 + 8]
+GPR[RT_0] ← memory[GPR[RS] + offset * 16]
+GPR[RT_1] ← memory[GPR[RS] + offset * 16 + 8]
 ```
 
 The contents of the 128-bit quadword at the memory location specified by the aligned effective address (If the processor doesn't support unaligned access) are fetched and placed in GPR RT_0 and RT_1.
 
-The 8-bit signed offset in instruction is multiplied by 8 then added to the contents of GPR RS to form the effective address.
+The 8-bit signed offset in instruction is multiplied by 16 then added to the contents of GPR RS to form the effective address.
 
 #### Restrictions
 An Address Error exception occurs if processor doesn't support unaligned access and
@@ -44,7 +44,7 @@ EffectiveAddress3..0 ≠ 0 (not quadword-aligned).
 
 #### Operation
 ```
-vAddr ← sign_extend(offset) * 8 + GPR[RS]
+vAddr ← sign_extend(offset) * 16 + GPR[RS]
 if !systemSupportUnaligned && vAddr{3..0}≠ 0 then
     SignalException(AddressError)
 endif
@@ -72,13 +72,13 @@ To load a quadword from memory to two FPRs
 
 #### Description 
 ```
-FPR[RT_0] ← memory[GPR[RS] + offset * 8]
-FPR[RT_1] ← memory[GPR[RS] + offset * 8 + 8]
+FPR[RT_0] ← memory[GPR[RS] + offset * 16]
+FPR[RT_1] ← memory[GPR[RS] + offset * 16 + 8]
 ```
 
 The contents of the 128-bit quadword at the memory location specified by the aligned effective address (If the processor doesn't support unaligned access) are fetched and placed in coprocessor 1 general register RT_0 and RT_1.
 
-The 8-bit signed offset in instruction is multiplied by 8 then added to the contents of GPR RS to form the effective address.
+The 8-bit signed offset in instruction is multiplied by 16 then added to the contents of GPR RS to form the effective address.
 
 #### Restrictions
 An Address Error exception occurs if processor doesn't support unaligned access and
@@ -86,7 +86,7 @@ EffectiveAddress3..0 ≠ 0 (not quadword-aligned).
 
 #### Operation
 ```
-vAddr ← sign_extend(offset) * 8 + GPR[RS]
+vAddr ← sign_extend(offset) * 16 + GPR[RS]
 if !systemSupportUnaligned && vAddr{3..0}≠ 0 then
     SignalException(AddressError)
 endif
@@ -114,12 +114,12 @@ To store a quadword from two GPRs to memory
 
 #### Description 
 ```
-memory[GPR[RS] + offset * 8] ← GPR[RT_0]
-memory[GPR[RS] + offset * 8 + 8] ← GPR[RT_1]
+memory[GPR[RS] + offset * 16] ← GPR[RT_0]
+memory[GPR[RS] + offset * 16 + 8] ← GPR[RT_1]
 ```
 The 128-bit quadword from GPR RT_0 and RT_1 is stored in memory at the location specified by the aligned effective address (If the processor doesn't support unaligned access).
 
-The 8-bit signed offset in instruction is multiplied by 8 then added to the contents of GPR RS to form the effective address.
+The 8-bit signed offset in instruction is multiplied by 16 then added to the contents of GPR RS to form the effective address.
 
 #### Restrictions
 An Address Error exception occurs if processor doesn't support unaligned access and
@@ -127,7 +127,7 @@ EffectiveAddress3..0 ≠ 0 (not quadword-aligned).
 
 #### Operation
 ```
-vAddr ← sign_extend(offset) * 8 + GPR[RS]
+vAddr ← sign_extend(offset) * 16 + GPR[RS]
 if !systemSupportUnaligned && vAddr{3..0}≠ 0 then
     SignalException(AddressError)
 endif
@@ -154,12 +154,12 @@ To store a quadword from two FPRs to memory
 
 #### Description 
 ```
-memory[FPR[RS] + offset * 8] ← GPR[RT_0]
-memory[FPR[RS] + offset * 8 + 8] ← GPR[RT_1]
+memory[FPR[RS] + offset * 16] ← GPR[RT_0]
+memory[FPR[RS] + offset * 16 + 8] ← GPR[RT_1]
 ```
 The 128-bit quadword from coprocessor 1 general register RT_0 and RT_1 is stored in memory at the location specified by the aligned effective address (If the processor doesn't support unaligned access).
 
-The 8-bit signed offset in instruction is multiplied by 8 then added to the contents of GPR RS to form the effective address.
+The 8-bit signed offset in instruction is multiplied by 16 then added to the contents of GPR RS to form the effective address.
 
 #### Restrictions
 An Address Error exception occurs if processor doesn't support unaligned access and
@@ -167,7 +167,7 @@ EffectiveAddress3..0 ≠ 0 (not quadword-aligned).
 
 #### Operation
 ```
-vAddr ← sign_extend(offset) * 8 + GPR[RS]
+vAddr ← sign_extend(offset) * 16 + GPR[RS]
 if !systemSupportUnaligned && vAddr{3..0}≠ 0 then
     SignalException(AddressError)
 endif
