@@ -11,7 +11,7 @@ Available on all Loongson64(GS464+) processors.
 
 ---------------------------------------------------------------------|
  15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
- C1 |            offset                  |fmt|         RT_1          |
+ C1 |                 offset                 |fmt|        RT_1       |
 ---------------------------------------------------------------------|
 ```
 |  INSN  |  MAJOR_OP  | C1 | fmt |
@@ -36,7 +36,7 @@ GPR[RT_1] ← memory[GPR[RS] + offset * 16 + 8]
 
 The contents of the 128-bit quadword at the memory location specified by the aligned effective address (If the processor doesn't support unaligned access) are fetched and placed in GPR RT_0 and RT_1.
 
-The 8-bit signed offset in instruction is multiplied by 16 then added to the contents of GPR RS to form the effective address.
+The 9-bit signed offset in instruction is multiplied by 16 then added to the contents of GPR RS to form the effective address.
 
 #### Restrictions
 An Address Error exception occurs if processor doesn't support unaligned access and
@@ -78,7 +78,7 @@ FPR[RT_1] ← memory[GPR[RS] + offset * 16 + 8]
 
 The contents of the 128-bit quadword at the memory location specified by the aligned effective address (If the processor doesn't support unaligned access) are fetched and placed in coprocessor 1 general register RT_0 and RT_1.
 
-The 8-bit signed offset in instruction is multiplied by 16 then added to the contents of GPR RS to form the effective address.
+The 9-bit signed offset in instruction is multiplied by 16 then added to the contents of GPR RS to form the effective address.
 
 #### Restrictions
 An Address Error exception occurs if processor doesn't support unaligned access and
@@ -119,7 +119,7 @@ memory[GPR[RS] + offset * 16 + 8] ← GPR[RT_1]
 ```
 The 128-bit quadword from GPR RT_0 and RT_1 is stored in memory at the location specified by the aligned effective address (If the processor doesn't support unaligned access).
 
-The 8-bit signed offset in instruction is multiplied by 16 then added to the contents of GPR RS to form the effective address.
+The 9-bit signed offset in instruction is multiplied by 16 then added to the contents of GPR RS to form the effective address.
 
 #### Restrictions
 An Address Error exception occurs if processor doesn't support unaligned access and
@@ -147,7 +147,7 @@ GS464E and afterwards won't emit Coprocessor Unusable for CU2 in any case.
 
 ---
 
-### gssq
+### gssqc1
 
 #### Purpose
 To store a quadword from two FPRs to memory
@@ -159,7 +159,7 @@ memory[FPR[RS] + offset * 16 + 8] ← GPR[RT_1]
 ```
 The 128-bit quadword from coprocessor 1 general register RT_0 and RT_1 is stored in memory at the location specified by the aligned effective address (If the processor doesn't support unaligned access).
 
-The 8-bit signed offset in instruction is multiplied by 16 then added to the contents of GPR RS to form the effective address.
+The 9-bit signed offset in instruction is multiplied by 16 then added to the contents of GPR RS to form the effective address.
 
 #### Restrictions
 An Address Error exception occurs if processor doesn't support unaligned access and
